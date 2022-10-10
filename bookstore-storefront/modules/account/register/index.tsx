@@ -24,14 +24,18 @@ const Register = () => {
         Router.push('/');
       })
       .catch((err) => console.log(err));
+
+    await medusaClient.customers?.retrieve().then(({ customer }) => {
+      console.log(customer);
+    });
   });
 
   return (
     <form onSubmit={onSubmit}>
-      <input {...register('first_name')} placeholder="first name" required />
-      <input {...register('last_name')} placeholder="last name" required />
-      <input {...register('email')} placeholder="email" required />
-      <input {...register('password')} placeholder="password" required />
+      <input {...register('first_name', { required: true })} placeholder="first name" />
+      <input {...register('last_name', { required: true })} placeholder="last name" />
+      <input {...register('email', { required: true })} placeholder="email" />
+      <input {...register('password', { required: true })} placeholder="password" />
       <input type="submit" />
     </form>
   );
