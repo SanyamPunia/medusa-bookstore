@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { medusaClient } from '@lib/config';
 import Layout from '@modules/layout/templates';
 import { NextPageWithLayout } from 'types/global';
+import Register from '@modules/account/register';
 
 const Home: NextPageWithLayout = () => {
   const [products, setProducts] = useState([]);
@@ -21,9 +22,20 @@ const Home: NextPageWithLayout = () => {
   console.log('products');
   console.log(products);
 
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      const user = medusaClient.customers.retrieve().then(({ customer }) => {
+        console.log(customer);
+      })
+    };
+
+    fetchCurrentUser()
+  });
+
   return (
     <div>
       <div>hello</div>
+      <Register />
     </div>
   );
 };
