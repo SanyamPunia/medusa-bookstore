@@ -52,6 +52,7 @@ const Login = () => {
               className="base-input"
               placeholder="Password"
               {...register('password', { required: true })}
+              type="password"
             />
             <div className="mx-auto">
               <button

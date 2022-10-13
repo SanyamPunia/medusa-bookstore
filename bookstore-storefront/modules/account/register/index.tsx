@@ -13,7 +13,7 @@ interface RegisterCredentials {
 
 const Register = () => {
   const [isRegisterVisible, setIsRegisterVisible] = useState<boolean>(true);
-  const router = useRouter()
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -58,6 +58,7 @@ const Register = () => {
               className="base-input"
               {...register('password', { required: true })}
               placeholder="Password"
+              type="password"
             />
             <div className="mx-auto">
               <button
