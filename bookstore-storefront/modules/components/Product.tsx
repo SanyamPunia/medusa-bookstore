@@ -1,4 +1,6 @@
+import { cn } from '@lib/class-names';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
@@ -9,15 +11,11 @@ interface PropType {
   title: string;
 }
 
-function cn(...classes: string[]) {
-  return classes.filter(Boolean).join('');
-}
-
 const Product = (props: PropType) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   return (
-    <div className="shadow-sm border border-gray-300 rounded transition hover:border-gray-200">
+    <div className="shadow-sm border border-gray-300 rounded transition hover:shadow-md hover:active:shadow-sm hover:border-gray-200">
       <Zoom>
         <Image
           src={props.thumbnail}
@@ -30,13 +28,16 @@ const Product = (props: PropType) => {
           onLoadingComplete={() => setIsLoading(false)}
         />
       </Zoom>
-      <div className="py-4 px-3 font-notosans space-y-3">
-        <p>{props.title}</p>
-        <hr />
-        <p className="bg-gray-100 w-fit rounded-lg px-1 text-gray-400 transition hover:bg-gray-200 cursor-default">
-          <span>#</span> {props.handle}
-        </p>
-      </div>
+
+      <Link href={`/products/${props.handle.replaceAll(' ', '-').toLowerCase()}`}>
+        <div className="py-4 px-3 font-notosans space-y-3 cursor-pointer">
+          <p>{props.title}</p>
+          <hr />
+          <p className="bg-gray-100 w-fit rounded-lg px-1 text-gray-400 transition hover:bg-gray-200 cursor-default">
+            <span>#</span> {props.handle}
+          </p>
+        </div>
+      </Link>
     </div>
   );
 };

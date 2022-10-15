@@ -31,7 +31,7 @@ const Login = () => {
       .authenticate(credentials)
       .then(() => {
         refetchCustomer();
-        router.push('/products');
+        router.push('/store');
       })
       .catch(handleError);
   });

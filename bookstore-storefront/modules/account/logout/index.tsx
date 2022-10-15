@@ -4,7 +4,7 @@ const Logout = () => {
   const { customer, handleLogout } = useAccount();
 
   return (
-    <div>
+    <div className='mt-5'>
       <div>
         <p>Signed In as: {customer?.first_name}</p>
         <p>Email: {customer?.email} </p>

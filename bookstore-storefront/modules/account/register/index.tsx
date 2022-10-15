@@ -28,7 +28,7 @@ const Register = () => {
       .create(credentials)
       .then(() => {
         refetchCustomer();
-        router.push('/products');
+        router.push('/store');
       })
       .catch((err) => console.log(err));
   });

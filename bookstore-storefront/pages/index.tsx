@@ -11,7 +11,7 @@ const Home: NextPageWithLayout = () => {
 
   useEffect(() => {
     if (customer) {
-      router.push('/products');
+      router.push('/store');
     }
   }, [customer]);
 

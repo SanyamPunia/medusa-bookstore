@@ -3,10 +3,11 @@ import ProductCard from '@modules/components/ProductCard';
 import Layout from '@modules/layout/templates';
 import { ReactElement, useEffect, useState } from 'react';
 import { useAccount } from '@lib/context/account-context';
+import { NextPageWithLayout, PrefetchedPageProps } from 'types/global';
 
-const Products = () => {
+const Store: NextPageWithLayout<PrefetchedPageProps> = () => {
+  const { checkSession } = useAccount();
   const [products, setProducts] = useState([]);
-  const { customer, checkSession } = useAccount();
 
   useEffect(() => {
     checkSession();
@@ -33,8 +34,8 @@ const Products = () => {
   );
 };
 
-Products.getLayout = (page: ReactElement) => {
+Store.getLayout = (page: ReactElement) => {
   return <Layout>{page}</Layout>;
 };
 
-export default Products;
+export default Store;

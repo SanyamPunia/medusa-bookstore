@@ -9,3 +9,7 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 export type AppPropsWithLayout<P = {}, IP = P> = AppProps<P> & {
   Component: NextPageWithLayout<P, IP>;
 };
+
+export type PrefetchedPageProps = {
+  notFound: boolean;
+};
