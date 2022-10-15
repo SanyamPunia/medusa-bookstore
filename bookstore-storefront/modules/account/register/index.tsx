@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import Login from '@modules/account/login';
+import { useAccount } from '@lib/context/account-context';
 
 interface RegisterCredentials {
   first_name: string;
@@ -14,6 +15,8 @@ interface RegisterCredentials {
 const Register = () => {
   const [isRegisterVisible, setIsRegisterVisible] = useState<boolean>(true);
   const router = useRouter();
+  const { refetchCustomer } = useAccount();
+
   const {
     register,
     handleSubmit,
@@ -24,13 +27,10 @@ const Register = () => {
     medusaClient.customers
       .create(credentials)
       .then(() => {
+        refetchCustomer();
         router.push('/products');
       })
       .catch((err) => console.log(err));
-
-    // await medusaClient.auth.getSession().then(({ customer }) => {
-    //   console.log(customer);
-    // });
   });
 
   if (isRegisterVisible) {

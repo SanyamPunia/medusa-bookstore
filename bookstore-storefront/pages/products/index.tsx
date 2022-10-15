@@ -2,15 +2,15 @@ import { medusaClient } from '@lib/config';
 import ProductCard from '@modules/components/ProductCard';
 import Layout from '@modules/layout/templates';
 import { ReactElement, useEffect, useState } from 'react';
+import { useAccount } from '@lib/context/account-context';
 
 const Products = () => {
-  const getSession = () => {
-    medusaClient.auth.getSession().then(({ customer }) => {
-      console.log(customer);
-    });
-  };
-
   const [products, setProducts] = useState([]);
+  const { customer, checkSession } = useAccount();
+
+  useEffect(() => {
+    checkSession();
+  }, [checkSession]);
 
   useEffect(() => {
     const fetchProducts = async () => {

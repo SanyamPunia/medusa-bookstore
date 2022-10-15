@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Register from '@modules/account/register';
-import Link from 'next/link';
+import { useAccount } from '@lib/context/account-context';
 
 interface SignInCredentials {
   email: string;
@@ -13,6 +13,12 @@ interface SignInCredentials {
 const Login = () => {
   const [isViewLogin, setIsViewLogin] = useState<boolean>(true);
   const router = useRouter();
+  const [authError, setAuthError] = useState<string | undefined>(undefined);
+  const { refetchCustomer } = useAccount();
+
+  const handleError = (_e: Error) => {
+    setAuthError('Invalid email or error');
+  };
 
   const {
     register,
@@ -24,17 +30,10 @@ const Login = () => {
     medusaClient.auth
       .authenticate(credentials)
       .then(() => {
-        if (medusaClient.auth.exists(credentials.email)) {
-          router.push('/products');
-        } else {
-          router.push('/');
-        }
+        refetchCustomer();
+        router.push('/products');
       })
-      .catch((err) => console.log(err));
-
-    // await medusaClient.auth.getSession().then(({ customer }) => {
-    //   console.log(customer);
-    // });
+      .catch(handleError);
   });
 
   if (isViewLogin) {
@@ -63,6 +62,11 @@ const Login = () => {
               </button>
             </div>
           </form>
+
+          {authError && (
+              <h1 className='mt-3 font-notosans text-sm text-red-400'>These credentials do not match our records</h1>
+          )}
+
           <h1 className="mt-5 italic text-gray-500">
             Not a member? Register{' '}
             <span
