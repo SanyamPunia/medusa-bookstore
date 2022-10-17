@@ -8,6 +8,7 @@ import {
   PlusCircleIcon,
   MinusCircleIcon,
 } from '@heroicons/react/24/outline';
+import Button from '@modules/components/Button';
 
 const Product = (props) => {
   console.log('Props from product-page');
@@ -85,8 +86,9 @@ const Product = (props) => {
                 <PlusCircleIcon className="w-7" />
               </span>
             </div>
-            <div className="bg-gray-100 px-5 text-md py-1 rounded h-full transition hover:bg-gray-200 hover:active:bg-gray-300 cursor-pointer">
-              <button onClick={() => createCart()}>Add</button>
+            {/* div css -  className="bg-gray-100 px-5 text-md py-1 rounded h-full transition hover:bg-gray-200 hover:active:bg-gray-300 cursor-pointer" */}
+            <div>
+              <Button text="Add" onClick={() => createCart()} />
             </div>
           </div>
         </div>

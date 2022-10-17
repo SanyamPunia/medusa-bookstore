@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import Login from '@modules/account/login';
 import { useAccount } from '@lib/context/account-context';
+import Button from '@modules/components/Button';
 
 interface RegisterCredentials {
   first_name: string;
@@ -61,12 +62,7 @@ const Register = () => {
               type="password"
             />
             <div className="mx-auto">
-              <button
-                className="font-playfair text-lg transition hover:border-gray-400 hover:shadow-md px-5 py-0.5 border border-gray-500 w-fit rounded-sm"
-                type="submit"
-              >
-                Register
-              </button>
+              <Button text="Register" type="submit" />
             </div>
           </form>
           <h1 className="mt-5 italic text-gray-500">

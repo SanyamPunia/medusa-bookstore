@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Register from '@modules/account/register';
 import { useAccount } from '@lib/context/account-context';
+import Button from '@modules/components/Button';
 
 interface SignInCredentials {
   email: string;
@@ -54,12 +55,7 @@ const Login = () => {
               type="password"
             />
             <div className="mx-auto">
-              <button
-                className="font-playfair text-lg transition hover:border-gray-400 hover:shadow-md px-5 py-0.5 border border-gray-500 w-fit rounded-sm"
-                type="submit"
-              >
-                Log In
-              </button>
+              <Button text='Log In' type='submit' />
             </div>
           </form>
 
